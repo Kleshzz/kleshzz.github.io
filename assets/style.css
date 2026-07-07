@@ -11,19 +11,31 @@ html, body {
   padding: 0;
   background: var(--bg);
   color: var(--fg);
+  min-height: 100vh;
 }
 body {
   font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace;
   line-height: 1.6;
-  padding: 3rem 4rem;
+  width: 100%;
+}
+main {
   max-width: 700px;
   margin: 0 auto;
+  padding: 3rem 4rem;
+}
+@media (max-width: 600px) {
+  main { padding: 2rem 1.5rem; }
 }
 .addr { 
   cursor: pointer; 
   word-break: break-all; 
   color: #ffffff; 
   user-select: none;
+  outline: none;
+  transition: color 0.12s ease;
+}
+.addr:hover, .addr:focus { 
+  color: var(--accent); 
 }
 h1 {
   color: var(--fg);
@@ -41,6 +53,7 @@ h2 {
 a {
   color: var(--fg);
   text-decoration: none;
+    transition: color 0.12s ease;
 }
 a:hover { color: var(--accent); }
 ul { list-style: none; padding: 0; margin: 0; }
@@ -48,4 +61,3 @@ li::before { content: "> "; color: var(--sub); }
 table { width: 100%; max-width: 700px; border-collapse: collapse; }
 td { padding: 0.6rem 0.5rem; border-bottom: 1px solid var(--line); }
 td:first-child { color: #ffffff; width: 90px; font-size: 0.85rem; }
-.addr:hover { color: var(--accent); }

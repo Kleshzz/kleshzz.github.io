@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title :text="$site.title"></title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=block" rel="stylesheet">
   <link rel="stylesheet" href="$site.asset('style.css').link()">
 </head>
 <body>
@@ -22,10 +25,10 @@
     <section id="donate">
       <h2>Donate</h2>
       <table>
-        <tr><td>EVM</td><td class="addr" data-addr="0x5D48621fF8bFa496553F8BfdC8978B5D1eAd990c" onclick="copyAddr(this)">0x5D48621fF8bFa496553F8BfdC8978B5D1eAd990c</td></tr>
-        <tr><td>BTC</td><td class="addr" data-addr="bc1qt34fa39mgpdle5ejf4487hrx2rhtkul3yqwdaf" onclick="copyAddr(this)">bc1qt34fa39mgpdle5ejf4487hrx2rhtkul3yqwdaf</td></tr>
-        <tr><td>SOL</td><td class="addr" data-addr="5vNV2quguNih1aJibAKBiJ7cVAU7tXTdSmfd9NVsZuer" onclick="copyAddr(this)">5vNV2quguNih1aJibAKBiJ7cVAU7tXTdSmfd9NVsZuer</td></tr>
-        <tr><td>DOGE</td><td class="addr" data-addr="DDZkS1PNzBcHbzEcbcJ7zAQnKNMFGBVLTz" onclick="copyAddr(this)">DDZkS1PNzBcHbzEcbcJ7zAQnKNMFGBVLTz</td></tr>
+        <tr><td>EVM</td><td class="addr" role="button" tabindex="0" data-addr="0x5D48621fF8bFa496553F8BfdC8978B5D1eAd990c" onclick="copyAddr(this)" onkeydown="handleKey(event, this)">0x5D48621fF8bFa496553F8BfdC8978B5D1eAd990c</td></tr>
+<tr><td>BTC</td><td class="addr" role="button" tabindex="0" data-addr="bc1qt34fa39mgpdle5ejf4487hrx2rhtkul3yqwdaf" onclick="copyAddr(this)" onkeydown="handleKey(event, this)">bc1qt34fa39mgpdle5ejf4487hrx2rhtkul3yqwdaf</td></tr>
+<tr><td>SOL</td><td class="addr" role="button" tabindex="0" data-addr="5vNV2quguNih1aJibAKBiJ7cVAU7tXTdSmfd9NVsZuer" onclick="copyAddr(this)" onkeydown="handleKey(event, this)">5vNV2quguNih1aJibAKBiJ7cVAU7tXTdSmfd9NVsZuer</td></tr>
+<tr><td>DOGE</td><td class="addr" role="button" tabindex="0" data-addr="DDZkS1PNzBcHbzEcbcJ7zAQnKNMFGBVLTz" onclick="copyAddr(this)" onkeydown="handleKey(event, this)">DDZkS1PNzBcHbzEcbcJ7zAQnKNMFGBVLTz</td></tr>
       </table>
     </section>
   </main>
@@ -38,6 +41,13 @@
       navigator.clipboard.writeText(addr);
       el.textContent = "copied";
       setTimeout(function () { el.textContent = addr; }, 800);
+    }
+
+    function handleKey(e, el) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        copyAddr(el);
+      }
     }
   </script>
 </body>

@@ -13,6 +13,13 @@
   <main>
     <h1 :text="$page.title"></h1>
     <div :html="$page.content()"></div>
+    <section id="contacts">
+      <h2>Contacts</h2>
+      <table>
+        <tr><td>Telegram</td><td class="addr" role="button" tabindex="0" data-addr="@kleshzzz" onclick="copyAddr(this)" onkeydown="handleKey(event, this)">@kleshzzz</td></tr>
+        <tr><td>Discord</td><td class="addr" role="button" tabindex="0" data-addr="leensize_jhgrh" onclick="copyAddr(this)" onkeydown="handleKey(event, this)">leensize_jhgrh</td></tr>
+      </table>
+    </section>
 
     <section id="projects">
       <h2>Links</h2>
@@ -26,9 +33,9 @@
       <h2>Donate</h2>
       <table>
         <tr><td>EVM</td><td class="addr" role="button" tabindex="0" data-addr="0x5D48621fF8bFa496553F8BfdC8978B5D1eAd990c" onclick="copyAddr(this)" onkeydown="handleKey(event, this)">0x5D48621fF8bFa496553F8BfdC8978B5D1eAd990c</td></tr>
-<tr><td>BTC</td><td class="addr" role="button" tabindex="0" data-addr="bc1qt34fa39mgpdle5ejf4487hrx2rhtkul3yqwdaf" onclick="copyAddr(this)" onkeydown="handleKey(event, this)">bc1qt34fa39mgpdle5ejf4487hrx2rhtkul3yqwdaf</td></tr>
-<tr><td>SOL</td><td class="addr" role="button" tabindex="0" data-addr="5vNV2quguNih1aJibAKBiJ7cVAU7tXTdSmfd9NVsZuer" onclick="copyAddr(this)" onkeydown="handleKey(event, this)">5vNV2quguNih1aJibAKBiJ7cVAU7tXTdSmfd9NVsZuer</td></tr>
-<tr><td>DOGE</td><td class="addr" role="button" tabindex="0" data-addr="DDZkS1PNzBcHbzEcbcJ7zAQnKNMFGBVLTz" onclick="copyAddr(this)" onkeydown="handleKey(event, this)">DDZkS1PNzBcHbzEcbcJ7zAQnKNMFGBVLTz</td></tr>
+        <tr><td>BTC</td><td class="addr" role="button" tabindex="0" data-addr="bc1qt34fa39mgpdle5ejf4487hrx2rhtkul3yqwdaf" onclick="copyAddr(this)" onkeydown="handleKey(event, this)">bc1qt34fa39mgpdle5ejf4487hrx2rhtkul3yqwdaf</td></tr>
+        <tr><td>SOL</td><td class="addr" role="button" tabindex="0" data-addr="5vNV2quguNih1aJibAKBiJ7cVAU7tXTdSmfd9NVsZuer" onclick="copyAddr(this)" onkeydown="handleKey(event, this)">5vNV2quguNih1aJibAKBiJ7cVAU7tXTdSmfd9NVsZuer</td></tr>
+        <tr><td>DOGE</td><td class="addr" role="button" tabindex="0" data-addr="DDZkS1PNzBcHbzEcbcJ7zAQnKNMFGBVLTz" onclick="copyAddr(this)" onkeydown="handleKey(event, this)">DDZkS1PNzBcHbzEcbcJ7zAQnKNMFGBVLTz</td></tr>
       </table>
     </section>
   </main>
@@ -38,9 +45,13 @@
       const addr = el.getAttribute('data-addr');
       if (el.textContent === "copied") return;
 
-      navigator.clipboard.writeText(addr);
-      el.textContent = "copied";
-      setTimeout(function () { el.textContent = addr; }, 800);
+      navigator.clipboard.writeText(addr).then(function() {
+        el.textContent = "copied";
+        el.blur();
+        setTimeout(function () { el.textContent = addr; }, 600);
+      }).catch(function(err) {
+        console.error('Failed to copy: ', err);
+      });
     }
 
     function handleKey(e, el) {
